@@ -1,0 +1,12 @@
+# Memory skill configuration
+
+# Search defaults
+search:
+  sessions: 5      # Number of sessions to return
+  messages: 5      # Messages per session
+  context: 500     # Characters per snippet
+
+# Index settings
+index:
+  base: memory-index.tsv
+  nlp: memory-index-nlp.tsv

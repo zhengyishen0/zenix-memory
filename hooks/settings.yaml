@@ -1,0 +1,6 @@
+# Memory hooks
+
+- event: UserPromptSubmit
+  script: memory-hint.sh
+  timeout: 5
+  description: Show relevant past sessions on first message
