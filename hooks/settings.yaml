@@ -1,6 +1,7 @@
 # Memory hooks
 
 - event: UserPromptSubmit
+  scope: claude-code
   script: memory-hint.sh
   timeout: 5
   description: Show relevant past sessions on first message
