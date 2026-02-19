@@ -1,0 +1,13 @@
+name: session-sync
+description: Auto-sync Claude Code JSONL sessions to YAML
+type: fswatch
+path: ~/.claude/projects/
+events: [Created, Updated]
+exclude:
+  - "\.DS_Store"
+  - "agent-"
+debounce: 10
+
+rules:
+  - match: "^.*\\.jsonl$"
+    action: skills/core/memory/scripts/sync.sh
