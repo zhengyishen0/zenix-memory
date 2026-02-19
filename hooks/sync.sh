@@ -1,11 +1,12 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 #
 # Hook: Sync session to unified YAML on stop
 #
 set -euo pipefail
 
 SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-MEMORY_DIR="${ZENIX_DATA:-$HOME/.zenix/data}/memory/sessions"
+FRAMEWORK="claude-code"
+MEMORY_DIR="${ZENIX_DATA:-$HOME/.zenix/data}/memory/sessions/$FRAMEWORK"
 
 mkdir -p "$MEMORY_DIR"
 

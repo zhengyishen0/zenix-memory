@@ -395,21 +395,36 @@ def test_roundtrip(session_id: str):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 2:
         print(__doc__)
         sys.exit(1)
 
     cmd = sys.argv[1]
-    arg = sys.argv[2]
 
     if cmd == "jsonl2yaml":
-        print(jsonl_to_yaml(arg))
+        if len(sys.argv) < 3:
+            print("Usage: convert.py jsonl2yaml <session-id>")
+            sys.exit(1)
+        print(jsonl_to_yaml(sys.argv[2]))
     elif cmd == "yaml2jsonl":
-        records = yaml_to_jsonl(Path(arg))
+        if len(sys.argv) < 3:
+            print("Usage: convert.py yaml2jsonl <yaml-file>")
+            sys.exit(1)
+        records = yaml_to_jsonl(Path(sys.argv[2]))
         for rec in records:
             print(json.dumps(rec))
+    elif cmd == "yaml2api":
+        # Output API messages as JSON (for --once)
+        if len(sys.argv) < 3:
+            print("Usage: convert.py yaml2api <yaml-file>")
+            sys.exit(1)
+        messages = yaml_to_api_messages(Path(sys.argv[2]))
+        print(json.dumps(messages))
     elif cmd == "test":
-        test_roundtrip(arg)
+        if len(sys.argv) < 3:
+            print("Usage: convert.py test <session-id>")
+            sys.exit(1)
+        test_roundtrip(sys.argv[2])
     else:
         print(f"Unknown command: {cmd}")
         sys.exit(1)

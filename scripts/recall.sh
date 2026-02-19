@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/bin/zsh
 # Recall sessions - ask session(s) a question using haiku
 set -eo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="${0:A:h}"
 SKILL_DIR="$(dirname "$SCRIPT_DIR")"
 INDEX_FILE="$SKILL_DIR/data/memory-index.tsv"
 
@@ -65,7 +65,8 @@ Rules:
 
 Question: $question"
 
-  agent --model haiku -r "$session_id" -p "$formatted_prompt" --no-session-persistence --output-format json 2>/dev/null | jq -r '.result // empty'
+  # Use agent --once with session context
+  agent --once --session "$session_id" --model haiku "$formatted_prompt" 2>/dev/null || echo "I don't have information about that."
 }
 
 # Main

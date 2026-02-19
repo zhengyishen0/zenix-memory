@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 # Memory hint - auto-extract keywords from natural language and search
 # Used by session start hooks to provide context hints
 #
@@ -11,7 +11,7 @@
 
 set -eo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="${0:A:h}"
 SKILL_DIR="$(dirname "$SCRIPT_DIR")"
 LIB_DIR="$SKILL_DIR/lib"
 

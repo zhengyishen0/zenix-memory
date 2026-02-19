@@ -1,15 +1,32 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 #
 # sync.sh - Manual sync session to unified YAML
+#
+# Usage:
+#   memory sync [session-id] [--framework <name>]
 #
 set -euo pipefail
 
 SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-MEMORY_DIR="${ZENIX_DATA:-$HOME/.zenix/data}/memory/sessions"
+FRAMEWORK="claude-code"  # Default framework
 
+# Parse args
+session_id=""
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --framework|-f)
+            FRAMEWORK="$2"
+            shift 2
+            ;;
+        *)
+            session_id="$1"
+            shift
+            ;;
+    esac
+done
+
+MEMORY_DIR="${ZENIX_DATA:-$HOME/.zenix/data}/memory/sessions/$FRAMEWORK"
 mkdir -p "$MEMORY_DIR"
-
-session_id="${1:-}"
 
 # If no session ID, find most recent
 if [[ -z "$session_id" ]]; then
@@ -21,7 +38,7 @@ if [[ -z "$session_id" ]]; then
             session_id=$(basename "$latest" .jsonl)
             echo "Found: ${session_id:0:12}..." >&2
         else
-            echo "Usage: memory sync [session-id]" >&2
+            echo "Usage: memory sync [session-id] [--framework <name>]" >&2
             exit 1
         fi
     fi

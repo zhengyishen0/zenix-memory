@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 # Memory hint hook - shows relevant past sessions for user's question
 # Runs on first message of session
 

@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/zsh
 # Search Claude sessions
 # Simple mode: "word1 word2 word3" → OR-all, ranked by keyword hits
 set -e
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="${0:A:h}"
 SKILL_DIR="$(dirname "$SCRIPT_DIR")"
 LIB_DIR="$SKILL_DIR/lib"
 

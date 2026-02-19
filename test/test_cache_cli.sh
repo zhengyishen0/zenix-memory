@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 # Test cache by resuming a session and checking token usage
 
 SESSION_ID="$1"
